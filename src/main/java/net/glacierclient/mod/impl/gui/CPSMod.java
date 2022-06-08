@@ -48,7 +48,7 @@ public class CPSMod extends HudMod {
             }
         }
 
-        fr.drawString("§l§8CPS: §r§7[ " + getCPSL() + " | " + getCPSR() + " ]", getX(), getY(), -1);
+        fr.drawString("§l§8CPS: §r§7[ " + getCPSL() + " | " + getCPSR() + " ]", getX(), getY(), -1); //
 
         super.draw();
     }
@@ -62,7 +62,7 @@ public class CPSMod extends HudMod {
     @Override
     public int getWidth()
     {
-        return fr.getStringWidth("§l§8FPS: §r§7" + mc.getDebugFPS() + " §l§8");
+        return fr.getStringWidth("§l§8CPS: §r§7 00 §l§8");
     }
     @Override
     public int getHeight()
