@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import sun.java2d.opengl.OGLSurfaceData;
 
 import java.awt.*;
 

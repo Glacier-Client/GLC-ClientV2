@@ -109,7 +109,7 @@ public class GlacierClient {
 
 
     public void shutdown(){
-        System.out.println("Stopping " + NAMEVER + " by " + AUTHOR);
+        Logger.info("Stopping " + NAMEVER + " by " + AUTHOR);
         discordRP.shutdown();
         WS.disconnect();
         //System.out.println(API.get("client/logout/" + playerUUID));

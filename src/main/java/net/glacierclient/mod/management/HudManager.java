@@ -17,6 +17,9 @@ public class HudManager {
     public MemoryUsedMod memoryUsedMod;
     public RealTimeDisplay realTimeDisplay;
     public KeyStrokes keyStrokes;
+    public ReachDisplay reachDisplay;
+    public ArmorStatus armorStatus;
+    public PingDisplay pingDisplay;
 
     public HudManager() {
         loadAllMods();
@@ -50,6 +53,9 @@ public class HudManager {
         hudMods.add(realTimeDisplay = new RealTimeDisplay());
         hudMods.add(keyStrokes = new KeyStrokes());
         hudMods.add(cps = new CPSMod());
+        hudMods.add(reachDisplay = new ReachDisplay());
+        hudMods.add(armorStatus = new ArmorStatus());
+        hudMods.add(pingDisplay = new PingDisplay());
     }
 
     public void unloadAllMods() {
@@ -62,6 +68,9 @@ public class HudManager {
         hudMods.remove(realTimeDisplay);
         hudMods.remove(keyStrokes);
         hudMods.remove(cps);
+        hudMods.remove(reachDisplay);
+        hudMods.remove(armorStatus);
+        hudMods.remove(pingDisplay);
     }
     public void loadAllModsForceNew()
     {
@@ -74,5 +83,8 @@ public class HudManager {
         hudMods.add(realTimeDisplay = new RealTimeDisplay(true));
         hudMods.add(keyStrokes = new KeyStrokes(true));
         hudMods.add(cps = new CPSMod(true));
+        hudMods.add(reachDisplay = new ReachDisplay(true));
+        hudMods.add(armorStatus = new ArmorStatus(true));
+        hudMods.add(pingDisplay = new PingDisplay(true));
     }
 }

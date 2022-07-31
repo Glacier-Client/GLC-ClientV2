@@ -17,8 +17,8 @@ public class WS {
     {
         try
         {
-            Logger.info("IP OF SOCKET SERVER" + InetAddress.getByName("api.glacierclient.net"));
-            socket = new Socket(InetAddress.getByName("api.glacierclient.net"), 8000);
+            Logger.info("IP of Socket Server: " + InetAddress.getByName("api.glacierclient.net").getHostAddress());
+            socket = new Socket(InetAddress.getByName("api.glacierclient.net").getHostAddress(), 8808);
             Logger.info("Connected to WS");
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
             dataInputStream = new DataInputStream(System.in);
