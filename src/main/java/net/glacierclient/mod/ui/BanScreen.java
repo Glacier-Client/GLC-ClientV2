@@ -47,7 +47,7 @@ public class BanScreen extends GuiScreen
     {
 //        this.buttonList.add(new GuiButton(1, width - 210, height - 131, 200, 20, "Singleplayer"));
 //        this.buttonList.add(new GuiButton(2, width - 210, height - 109, 200, 20, "Multiplayer"));
-        this.buttonList.add(new GuiButton(3, width - 210, height - 87, 200, 20, "Options"));
+//        this.buttonList.add(new GuiButton(3, width - 210, height - 87, 200, 20, "Options"));
         this.buttonList.add(new GuiButton(4, width - 210, height - 44, 200, 20, "Quit"));
         this.buttonList.add(new GuiButton(10, width - 210, height - 65, 99, 20, "Website"));
         this.buttonList.add(new GuiButton(11, width - 109, height - 65, 99, 20, "Discord"));

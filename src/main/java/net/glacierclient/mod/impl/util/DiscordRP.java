@@ -6,11 +6,14 @@ import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
 import net.arikia.dev.drpc.DiscordUser;
 import net.arikia.dev.drpc.callbacks.ReadyCallback;
+import net.glacierclient.util.misc.Logger;
 
 public class DiscordRP {
 
     private boolean running = true;
     private long created = 0;
+    public DiscordUser discordUser;
+    public String discordUserName;
 
     public  void start()
     {
@@ -18,8 +21,10 @@ public class DiscordRP {
         DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler(new ReadyCallback() {
             @Override
             public void apply(DiscordUser user) {
-                System.out.println("Welcome " + user.username + "#" + user.discriminator);
-                update("Playing Minecraft 1.8.9", "");
+                discordUser = user;
+                discordUserName = user.username + "#" + user.discriminator;
+                Logger.info("Welcome " + user.username + "#" + user.discriminator);
+                update("");
             }
         }).build();
         DiscordRPC.discordInitialize("944777934915399691", handlers, true);
@@ -38,11 +43,11 @@ public class DiscordRP {
         running = false;
         DiscordRPC.discordShutdown();
     }
-    public void update(String firstLine, String secondLine)
+    public void update(String secondLine)
     {
         DiscordRichPresence.Builder b = new DiscordRichPresence.Builder(secondLine);
         b.setBigImage("large", "");
-        b.setDetails(firstLine);
+        b.setDetails("Playing Minecraft 1.8.9");
         b.setStartTimestamps(created);
 
         DiscordRPC.discordUpdatePresence(b.build());

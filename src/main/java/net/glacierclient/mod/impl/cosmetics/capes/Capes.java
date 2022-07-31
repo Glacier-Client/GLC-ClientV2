@@ -1,11 +1,10 @@
 package net.glacierclient.mod.impl.cosmetics.capes;
 
-import net.glacierclient.GlacierClient;
-import net.glacierclient.http.API;
+import net.glacierclient.util.http.API;
 import net.glacierclient.mod.management.ModNoGUI;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.util.ResourceLocation;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -21,7 +20,7 @@ public class Capes extends ModNoGUI {
 
     public static boolean capeEquiped(AbstractClientPlayer entitylivingbaseIn) {
             if (playerList.containsKey(entitylivingbaseIn.getName())) {
-                if(!(playerList.get(entitylivingbaseIn.getName()).equals( apiNone)))
+                if(!(playerList.get(entitylivingbaseIn.getName()).equals(apiNone)))
                 {
                     return true;
                 } else return false;
@@ -49,7 +48,8 @@ public class Capes extends ModNoGUI {
 
     private static void checkUser(String playerName) {
         if (!playerList.containsKey(playerName)) {
-            String playerUuid = API.get("user/playerUUID/txt/" + playerName).replaceAll("\"", "");
+            JSONObject playerObj = new JSONObject(API.get("user/playerUUID/" + playerName).replaceAll("\"", ""));
+            String playerUuid = playerObj.getString("UUID");
             if(!playerUuid.equals(apiNone)) {
                 playerList.put(playerName, API.get("user/assets/equipedCape/txt/" + playerUuid).replaceAll("\"", ""));
             } else {
