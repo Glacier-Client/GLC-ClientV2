@@ -3,6 +3,8 @@ package net.glacierclient.mod.management;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import net.glacierclient.mod.ui.clientsettings.hudposconfig.comp.DraggableComponent;
+import net.glacierclient.util.misc.LocationUtil;
+import net.glacierclient.util.misc.Logger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
@@ -70,7 +72,7 @@ public class HudMod {
     }
 
     public void saveHudMod() {
-        File file = new File("GlacierClientConfig/Mods/GUI/" + this.name + ".spyminerCONF");
+        File file = new File(LocationUtil.GUImodSettingsSaveLocation + this.name + ".spyminerCONF");
         if (!file.exists()) {
             try {
                 File directory = new File(file.getParent());
@@ -80,7 +82,7 @@ public class HudMod {
                 file.createNewFile();
                 System.out.println();
             } catch (IOException e) {
-                System.out.println("failed to create file");
+                Logger.error("failed to create file");
             }
         }
         try {
@@ -90,14 +92,14 @@ public class HudMod {
             bufferedWriter.write(gson.toJson(drag));
             bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println("failed to save to file");
+            Logger.error("failed to save to file");
         }
     }
 
     public void loadHudMod(int xNew, int yNew, String nameNew, boolean forceNew) {
 
         if (!forceNew) {
-            File file = new File("GlacierClientConfig/Mods/GUI/" + (String) this.name + ".spyminerCONF");
+            File file = new File(LocationUtil.GUImodSettingsSaveLocation + (String) this.name + ".spyminerCONF");
             if (!file.exists()) {
                 drag = new DraggableComponent(xNew, yNew, getWidth(), getHeight(), new Color(0, 0, 0, 0).getRGB(), nameNew, false);
             } else {
@@ -108,12 +110,12 @@ public class HudMod {
                     drag = gson.fromJson(myReader, DraggableComponent.class);
 
                 } catch (Exception e) {
-                    System.out.println("failed to load file");
+                    Logger.error("failed to load file");
                 }
             }
             saveHudMod();
         } else {
-            File file = new File("GlacierClientConfig/Mods/GUI/" + (String) this.name + ".spyminerCONF");
+            File file = new File(LocationUtil.GUImodSettingsSaveLocation + (String) this.name + ".spyminerCONF");
             if (!file.exists()) {
                 drag = new DraggableComponent(xNew, yNew, getWidth(), getHeight(), new Color(0, 0, 0, 0).getRGB(), nameNew, false);
                 saveHudMod();
@@ -125,7 +127,7 @@ public class HudMod {
                     drag = new DraggableComponent(xNew, yNew, getWidth(), getHeight(), new Color(0, 0, 0, 0).getRGB(), nameNew, false);
                     saveHudMod();
                 } catch (Exception e) {
-                    System.out.println("failed to load file");
+                    Logger.error("failed to load file");
                 }
 
             }

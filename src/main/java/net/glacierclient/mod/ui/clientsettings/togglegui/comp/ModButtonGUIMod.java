@@ -45,7 +45,6 @@ public class ModButtonGUIMod {
         if(mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h)
         {
             m.toggle();
-            System.out.println(m.name);
         }
     }
 

@@ -13,9 +13,9 @@ import net.glacierclient.mod.ui.clientsettings.hudposconfig.HUDPosConfig;
 import net.glacierclient.mod.management.HudManager;
 import net.glacierclient.mod.management.ModManager;
 import net.glacierclient.util.misc.DiscordWebhook;
+import net.glacierclient.util.misc.LocationUtil;
 import net.glacierclient.util.misc.Logger;
 import net.glacierclient.util.misc.SessionChanger;
-import net.glacierclient.util.misc.WebhookUtil;
 import net.glacierclient.util.security.Check;
 import net.glacierclient.util.security.Identification;
 import net.minecraft.client.Minecraft;
@@ -54,9 +54,9 @@ public class GlacierClient {
 
         SessionChanger.getInstance().setUserOffline("SpyMiner");
 
-        WS.connect();
+        //WS.connect();
 
-        userObj = new JSONObject(API.get("user/playerUUID/" + mc.getSession().getUsername()).replaceAll("\"", ""));
+        userObj = new JSONObject(API.get("user/playerUUID/" + mc.getSession().getUsername()));
         playerUUID = userObj.getString("UUID");
         playerName = userObj.getString("Player");
 
@@ -68,7 +68,7 @@ public class GlacierClient {
             isBanned = true;
             banReason = banObj.getString("banReason");
             try {
-                DiscordWebhook webhook = new DiscordWebhook(WebhookUtil.clientLaunch);
+                DiscordWebhook webhook = new DiscordWebhook(LocationUtil.clientLaunchURL);
                 webhook.addEmbed(new DiscordWebhook.EmbedObject()
                         .setTitle("Client Launched (" + VERSION + ") -- Banned User")
                         .setColor(Color.RED)
@@ -86,7 +86,7 @@ public class GlacierClient {
         }
         else {
             try {
-                DiscordWebhook webhook = new DiscordWebhook(WebhookUtil.clientLaunch);
+                DiscordWebhook webhook = new DiscordWebhook(LocationUtil.clientLaunchURL);
                 webhook.addEmbed(new DiscordWebhook.EmbedObject()
                         .setTitle("Client Launched (" + VERSION + ")")
                         .setColor(Color.CYAN)
@@ -111,7 +111,7 @@ public class GlacierClient {
     public void shutdown(){
         Logger.info("Stopping " + NAMEVER + " by " + AUTHOR);
         discordRP.shutdown();
-        WS.disconnect();
+        //WS.disconnect();
         //System.out.println(API.get("client/logout/" + playerUUID));
 
         hudManager.saveAllMods();
