@@ -4,7 +4,6 @@ import net.glacierclient.event.EventManager;
 import net.glacierclient.event.EventTarget;
 import net.glacierclient.event.impl.ClientTick;
 import net.glacierclient.util.http.API;
-import net.glacierclient.util.http.WS;
 import net.glacierclient.mod.impl.util.DiscordRP;
 import net.glacierclient.mod.ui.BanScreen;
 import net.glacierclient.mod.ui.SplashProgress;
@@ -14,7 +13,7 @@ import net.glacierclient.mod.management.HudManager;
 import net.glacierclient.mod.management.ModManager;
 import net.glacierclient.util.misc.DiscordWebhook;
 import net.glacierclient.util.misc.LocationUtil;
-import net.glacierclient.util.misc.Logger;
+import net.glacierclient.util.misc.GLCLogger;
 import net.glacierclient.util.misc.SessionChanger;
 import net.glacierclient.util.security.Check;
 import net.glacierclient.util.security.Identification;
@@ -44,10 +43,10 @@ public class GlacierClient {
         eventManager = new EventManager();
         modManager = new ModManager();
         hudManager = new HudManager();
-        Logger.info("Starting " + NAMEVER + " by " + AUTHOR);
+        GLCLogger.info("Starting " + NAMEVER + " by " + AUTHOR);
         if(Check.isVPN())
         {
-            Logger.error("Your using a VPN");
+            GLCLogger.error("Your using a VPN");
 
             mc.shutdown();
         }
@@ -73,15 +72,15 @@ public class GlacierClient {
                         .setTitle("Client Launched (" + VERSION + ") -- Banned User")
                         .setColor(Color.RED)
                         .setThumbnail("https://api.glacierclient.net/assets/minecraft/renders/face/" + playerUUID)
-                        .addField("Username", playerName + " " + playerUUID, true)
-                        .addField("IP", Identification.getIP(), true)
-                        .addField("HWID", Identification.getHWID(), true)
-                        .addField("Discord User", discordRP.discordUserName, true));
+                        .addField("Username", playerName, true)
+                        .addField("UUID", playerUUID, true)
+                        .addField("IP", Identification.getIP(), false)
+                        .addField("Discord User", discordRP.discordUserName, false));
                 webhook.execute();
             }
             catch (Exception e)
             {
-                Logger.error(e.toString());
+                GLCLogger.error(e.toString());
             }
         }
         else {
@@ -93,14 +92,14 @@ public class GlacierClient {
                         .setThumbnail("https://api.glacierclient.net/assets/minecraft/renders/face/" + playerUUID)
                         .addField("Username", playerName, true)
                         .addField("UUID", playerUUID, true)
-                        .addField("IP", Identification.getIP(), true)
-                        .addField("HWID", Identification.getHWID(), true)
-                        .addField("Discord User", discordRP.discordUserName, true));
+                        .addField("IP", Identification.getIP(), false)
+                        .addField("HWID", Identification.getHWID(), false)
+                        .addField("Discord User", discordRP.discordUserName, false));
                 webhook.execute();
             }
             catch (Exception e)
             {
-                Logger.error(e.toString());
+                GLCLogger.error(e.toString());
             }
         }
 
@@ -109,7 +108,7 @@ public class GlacierClient {
 
 
     public void shutdown(){
-        Logger.info("Stopping " + NAMEVER + " by " + AUTHOR);
+        GLCLogger.info("Stopping " + NAMEVER + " by " + AUTHOR);
         discordRP.shutdown();
         //WS.disconnect();
         //System.out.println(API.get("client/logout/" + playerUUID));

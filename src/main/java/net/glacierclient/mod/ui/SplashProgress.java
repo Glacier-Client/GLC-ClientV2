@@ -107,6 +107,6 @@ public class SplashProgress {
 
     public static void resetTextureState()
     {
-        GlStateManager.textureState[GlStateManager.activeTextureUnit].textureName = -1;
+        GlStateManager.textureState[GlStateManager.getActiveTextureUnit()].textureName = -1;
     }
 }

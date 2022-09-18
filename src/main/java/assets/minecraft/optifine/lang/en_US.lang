@@ -10,11 +10,6 @@ of.general.smart=Smart
 
 # Keys
 of.key.zoom=Zoom
-key.test=Test Mod to be removed!
-key.hud_conf=HUD Placement Menu
-key.click_gui=MOD Config Menu
-key.categories.GlacierClient= Glacier Client
-
 
 # Message
 of.message.aa.shaders1=Antialiasing is not compatible with Shaders.

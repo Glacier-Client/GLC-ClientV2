@@ -6,7 +6,7 @@ import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
 import net.arikia.dev.drpc.DiscordUser;
 import net.arikia.dev.drpc.callbacks.ReadyCallback;
-import net.glacierclient.util.misc.Logger;
+import net.glacierclient.util.misc.GLCLogger;
 
 public class DiscordRP {
 
@@ -14,6 +14,7 @@ public class DiscordRP {
     private long created = 0;
     public DiscordUser discordUser;
     public String discordUserName;
+    public String discordUserID;
 
     public  void start()
     {
@@ -23,7 +24,8 @@ public class DiscordRP {
             public void apply(DiscordUser user) {
                 discordUser = user;
                 discordUserName = user.username + "#" + user.discriminator;
-                Logger.info("Welcome " + user.username + "#" + user.discriminator);
+                discordUserID = user.userId;
+                GLCLogger.info("Welcome " + user.username + "#" + user.discriminator);
                 update("");
             }
         }).build();
@@ -46,7 +48,7 @@ public class DiscordRP {
     public void update(String secondLine)
     {
         DiscordRichPresence.Builder b = new DiscordRichPresence.Builder(secondLine);
-        b.setBigImage("large", "");
+        b.setBigImage("large", "https://www.glacierclient.net/");
         b.setDetails("Playing Minecraft 1.8.9");
         b.setStartTimestamps(created);
 

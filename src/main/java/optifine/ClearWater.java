@@ -1,5 +1,6 @@
 package optifine;
 
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -25,8 +26,8 @@ public class ClearWater
                 i = 1;
             }
 
-            BlockLeavesBase.setLightOpacity(Blocks.water, i);
-            BlockLeavesBase.setLightOpacity(Blocks.flowing_water, i);
+            BlockAir.setLightOpacity(Blocks.water, i);
+            BlockAir.setLightOpacity(Blocks.flowing_water, i);
         }
 
         if (p_updateWaterOpacity_1_ != null)

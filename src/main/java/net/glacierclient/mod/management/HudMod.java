@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import net.glacierclient.mod.ui.clientsettings.hudposconfig.comp.DraggableComponent;
 import net.glacierclient.util.misc.LocationUtil;
-import net.glacierclient.util.misc.Logger;
+import net.glacierclient.util.misc.GLCLogger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
@@ -82,7 +82,7 @@ public class HudMod {
                 file.createNewFile();
                 System.out.println();
             } catch (IOException e) {
-                Logger.error("failed to create file");
+                GLCLogger.error("failed to create file");
             }
         }
         try {
@@ -92,7 +92,7 @@ public class HudMod {
             bufferedWriter.write(gson.toJson(drag));
             bufferedWriter.close();
         } catch (IOException e) {
-            Logger.error("failed to save to file");
+            GLCLogger.error("failed to save to file");
         }
     }
 
@@ -110,7 +110,7 @@ public class HudMod {
                     drag = gson.fromJson(myReader, DraggableComponent.class);
 
                 } catch (Exception e) {
-                    Logger.error("failed to load file");
+                    GLCLogger.error("failed to load file");
                 }
             }
             saveHudMod();
@@ -127,7 +127,7 @@ public class HudMod {
                     drag = new DraggableComponent(xNew, yNew, getWidth(), getHeight(), new Color(0, 0, 0, 0).getRGB(), nameNew, false);
                     saveHudMod();
                 } catch (Exception e) {
-                    Logger.error("failed to load file");
+                    GLCLogger.error("failed to load file");
                 }
 
             }
